@@ -1,0 +1,32 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="content-section">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Add Food Item</legend>
+                <div>Barcode*</div>
+                <input type="text" class="form-control" name="barcode" placeholder="{{ barcode }}" disabled><br>
+                <div>Product Name*</div>
+                <input type="text" class="form-control" name="product_name" placeholder="{{ product_name }}" disabled><br>
+                <div>Category*</div>
+                <input type="text" class="form-control" name="category" placeholder="{{ category }}" disabled><br>
+                <div>Sub Category* </div>
+                <input type="text" class="form-control" name="sub_category" placeholder="{{ sub_category }}" disabled><br>
+                <div>Location* </div>
+                <input type="text" class="form-control" name="location" placeholder="{{ location }}" disabled><br>
+                <div>{{ form|crispy }}</div>
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Add Item</button>
+            </div>
+        </form>
+        <div class="border-top pt-3">
+            <small class="text-muted">
+                Already have an account? <a class="ml-2" href="{% url 'login' %}">Sign In</a>
+            </small>
+        </div>
+    </div>
+{% endblock content %}
+

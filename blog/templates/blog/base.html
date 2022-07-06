@@ -1,0 +1,118 @@
+{% load static %}
+<!DOCTYPE html> 
+<html>
+    <head>
+
+    <!-- Favicons -->
+    <link
+      rel="apple-touch-icon"
+      sizes="221x221"
+      href="{% static 'blog/FoodInventoryFavicon.png' %}"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="{% static 'blog/FoodInventoryFavicon32x32.png' %}"
+    />
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/main.css' %}">
+
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    {% if title %}
+        <title>Food Inventory - {{title}}</title>
+    {% else %}
+        <title>Food Inventory</title>
+    {% endif %}
+    </head>
+    <body>
+        <header class="site-header">
+            <nav class="navbar navbar-expand-md navbar-light fixed-top bg-light">
+              <div class="container">
+                <a class="navbar-brand" href="{% url 'blog-home' %}">
+                  <img src="{% static 'blog/FoodInventoryLogo.png' %}" height="50" alt="">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarToggle">
+                  <div class="navbar-nav mr-auto">
+                    <a class="nav-item nav-link" href="{% url 'blog-home' %}">Home</a>
+                    <a class="nav-item nav-link" href="{% url 'blog-about' %}">About</a>
+                  </div>
+                  <!-- Navbar Right Side -->
+                  <div class="navbar-nav">
+                    {% if user.is_authenticated %}
+                      <a class="nav-item nav-link" href="{% url 'dashboard' %}">Dashboard</a>
+                      <a class="nav-item nav-link" href="{% url 'post-create' %}">New Post</a>
+                      <a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a>
+                      <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
+                      <form class="d-flex" method=POST action = "{% url 'search_archive' %}">
+                        {% csrf_token %}
+                        <input class="form-control me-2" type="search" placeholder="Search" name="searched" aria-label="Search">
+                        <button class="btn btn-outline-info" type="submit">Search</button>
+                      </form>
+                    {% else %}
+                      <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+                      <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </nav>
+          </header>
+          <main role="main" class="container" style=" margin-top: 100px;">
+            <div class="row">
+              <div class="col-md-8">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}">
+                          {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                {% block content %}{% endblock %}
+              </div>
+              <div class="col-md-4">
+                <div class="content-section">
+                  <h3>Recommended </h3>
+                  <p class='text-muted'>Here are some other sites you may like
+                    <ul class="list-group">
+                      <li class="list-group-item list-group-item-light">
+                        <a class="nav-item nav-link" href="https://www.stephen.photography/portfolio">My Portfolio</a>
+                      </li>
+                      <li class="list-group-item list-group-item-light">
+                        <a class="nav-item nav-link" href="https://www.stephen.photography">My photography Portfolio</a>
+                      </li>
+                      <li class="list-group-item list-group-item-light">
+                        <a class="nav-item nav-link" href="https://www.stephen.photography/todolist">To Do List App</a>
+                      </li>
+                    </ul>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </main>
+
+          <footer>
+            <div style="text-align: center;">
+              <p>© Stephen Lawson • All Rights Reserved</p>
+              <a class="nav-item nav-link" href="{% url 'privacy_policy' %}">Our Privacy Policy</a>
+            </div>
+          </footer>
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    </body>
+</html>

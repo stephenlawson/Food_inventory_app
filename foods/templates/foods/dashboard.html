@@ -1,0 +1,119 @@
+{% extends "blog/base_nosidebar.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+        <br>
+
+        <div class="row">
+            <div class="col-md">
+                <div class="card card-body">
+                        <h2>Food Inventory</h2>
+                        <div class="alert alert-primary">
+                                Please use the search bar above to find food items to add to your inventory.
+                        </div>
+                        <div class="container">
+                                <div class="row">
+                                  <div class="col-sm">
+                                        <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
+                                                <h5 class="card-header" style="text-align: center;">Inventory Count</h5>
+                                                <div class="card-body">
+                                                        <h3 class="card-text" style="text-align: center;">{{ total }}</h3>
+                                                </div>
+                                        </div>
+                                  </div>
+                                  <div class="col-sm">
+                                        <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">
+                                                <h5 class="card-header" style="text-align: center;">Expired Count</h5>
+                                                <div class="card-body">
+                                                  <h3 class="card-text" style="text-align: center;">{{ foods_expired }}</h3>
+                                                </div>
+                                        </div>
+                                  </div>
+                                  <div class="col-sm">
+                                        <div class="card text-white bg-warning mb-3" style="max-width: 18rem;">
+                                                <h5 class="card-header" style="text-align: center;">Most Popular Item</h5>
+                                                <div class="card-body">
+                                                  <h3 class="card-text" style="text-align: center;">{{ most_common }}</h3>
+                                                </div>
+                                        </div>
+                                  </div>
+                                </div>
+                              </div>
+                </div>
+                <div class="card card-body" style="overflow-x:auto;">
+                    <table class="table">
+                        <tr>
+                            <th>Barcode</th>
+                            <th style="min-width: 160px;">Product Name</th>
+                            <th>Category</th>
+                            <th style="min-width: 160px;">Sub Category</th>
+                            <th>Location</th>
+                            <th>Quantity</th>
+                            <th>Expiration</th>
+                            <th>Added</th>
+                            <th>Days Left</th>
+                            <th>Update</th>
+                            <th>Delete</th>
+                        </tr>
+                        <form method="get">
+                            <tr>
+                                <th>
+                                        {{myFilter.form.barcode}} 
+                                </th>
+                                <th>
+                                        {{myFilter.form.product_name}}
+                                    
+                                </th>
+                                <th>
+                                        {{myFilter.form.category}}
+                                    
+                                </th>
+                                <th>
+                                        {{myFilter.form.sub_category}}
+                                    
+                                </th>
+                                <th>
+                                        {{myFilter.form.location}}
+                                    
+                                </th>
+                                <th>
+                                        {{myFilter.form.quantity}}
+                                    
+                                </th>
+                                <th>
+                                        {{myFilter.form.expiration}}
+                                    
+                                </th>
+                                <th>
+                                        {{myFilter.form.updated}}
+                                    
+                                </th>
+                                <th style="min-width: 80px;">
+                                        {{myFilter.form.Days_Left}}
+                                    
+                                </th>
+                                <th><button class="btn btn-primary btn-sm btn-block" type="submit">Search</button></th>
+                            </tr>
+                        </form>
+                        {% for food in foods %}
+                        <tr>
+                            <td>{{food.barcode|truncatechars:12}}</td>
+                            <td>{{food.product_name|truncatechars:60}}</td>
+                            <td>{{food.category|truncatechars:25}}</td>
+                            <td>{{food.sub_category|truncatechars:60}}</td>
+                            <td>{{food.location}}</td>
+                            <td>{{food.quantity|truncatechars:7}}</td>
+                            <td>{{food.expiration}}</td>
+                            <td>{{food.updated}}</td>
+                            <td>{{food.Days_Left|floatformat:"0"}}</td>
+                            <td><a class="btn btn-sm btn-info" 
+                                href="{% url 'update_food_item' food.id %}">Update</a></td>
+                            <td><a class="btn btn-sm btn-danger" 
+                                href="{% url 'delete_food_item' food.id %}">Delete</a></td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+{% endblock content %}
+
