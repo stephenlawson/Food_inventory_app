@@ -31,7 +31,7 @@ SECRET_KEY = config['SECRET_KEY']
 DEBUG = False
 
 
-ALLOWED_HOSTS = ['www.foodinventory.app', 'foodinventory.app', '172.104.193.236']
+ALLOWED_HOSTS = ['www.foodinventory.app', 'foodinventory.app']
 
 
 # Application definition
