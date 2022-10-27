@@ -49,7 +49,6 @@ The project utilizes Linode to serve webpages, AWS S3 buckets to serve static an
 - Desktop-first workflow
 
 
-**Note: These are just examples. Delete this note and replace the list above with your own choices**
 
 ### What I learned
 
