@@ -62,7 +62,7 @@ I will continue to work on implementing new features, improving the style of the
 
 ## Author
 
-- Website - [Portfolio Site](https://www.stephen.photography/portfolio)
+- [My Portfolio Site](https://www.stephen.photography/portfolio)
 
 
 
