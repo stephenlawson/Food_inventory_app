@@ -32,7 +32,7 @@ Create a dynamic and easy to use website where users can easily lookup their foo
 
 ### Links
 
-- Solution URL: [Food Inventory App](https://www.foodinventory.app/)
+- Website URL: [Food Inventory App](https://www.foodinventory.app/)
 
 
 ## My process
